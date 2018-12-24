@@ -1,0 +1,31 @@
+##############################################################################################################
+# Battery recall notices: Fujitsu
+#
+# These are properties defining the behavior:
+#  UPOWER_RECALL_NOTICE
+#  UPOWER_RECALL_VENDOR
+#  UPOWER_RECALL_URL
+#
+
+# only match power_supply devices
+SUBSYSTEM!="power_supply", GOTO="up_battery_recall_fujitsu_end"
+
+# only match batteries
+ATTR{type}!="Battery", GOTO="up_battery_recall_fujitsu_end"
+
+# only match correct manufacturer
+ATTR{manufacturer}!="Fujitsu", GOTO="up_battery_recall_fujitsu_end"
+
+ATTR{model_name}=="CP255100", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="CP255108", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="CP229720", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="CP229725", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="CP234003", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="CP234019", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="CP283030", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="CP267910", ENV{UPOWER_RECALL_NOTICE}="1"
+
+ENV{UPOWER_RECALL_NOTICE}=="1", ENV{UPOWER_RECALL_VENDOR}="Fujitsu", ENV{UPOWER_RECALL_URL}="http://www.computers.us.fujitsu.com/battery/"
+
+LABEL="up_battery_recall_fujitsu_end"
+

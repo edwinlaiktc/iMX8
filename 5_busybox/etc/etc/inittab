@@ -1,0 +1,8 @@
+#!/bin/ash
+#/etc/inittab
+::sysinit:-/etc/init.d/rcS
+::respawn:-/bin/ash
+::askfirst:-/bin/ash
+::ctrlaltdel:/sbin/reboot
+::shutdown:/bin/umount -a -r
+

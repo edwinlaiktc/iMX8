@@ -1,0 +1,38 @@
+##############################################################################################################
+# Battery recall notices: IBM
+#
+# These are properties defining the behavior:
+#  UPOWER_RECALL_NOTICE
+#  UPOWER_RECALL_VENDOR
+#  UPOWER_RECALL_URL
+#
+
+# only match power_supply devices
+SUBSYSTEM!="power_supply", GOTO="up_battery_recall_ibm_end"
+
+# only match batteries
+ATTR{type}!="Battery", GOTO="up_battery_recall_ibm_end"
+
+# only match correct manufacturer
+ATTR{manufacturer}!="SONY", GOTO="up_battery_recall_ibm_end"
+
+# only recalled on some particular models
+ATTR{[dmi/id]product_version}!="*R60*|*T60*|*Z60m*|*Z61e*|*Z61m*|*Z61p*", GOTO="up_battery_recall_ibm_end"
+
+ATTR{model_name}=="92P1072", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="92P1073", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="92P1088", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="92P1089", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="92P1142", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="92P1141", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="92P1170", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="92P1169", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="93P5028", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="92P1174", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="92P1173", ENV{UPOWER_RECALL_NOTICE}="1"
+ATTR{model_name}=="93P5030", ENV{UPOWER_RECALL_NOTICE}="1"
+
+ENV{UPOWER_RECALL_NOTICE}=="1", ENV{UPOWER_RECALL_VENDOR}="LENOVO", ENV{UPOWER_RECALL_URL}="http://www.lenovo.com/batteryprogram"
+
+LABEL="up_battery_recall_ibm_end"
+

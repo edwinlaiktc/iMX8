@@ -1,0 +1,13 @@
+ACTION!="add|change", GOTO="xorg_synaptics_quirks_end"
+KERNEL!="event*", GOTO="xorg_synaptics_quirks_end"
+
+ENV{ID_INPUT_TOUCHPAD}!="1", GOTO="xorg_synaptics_quirks_end"
+
+# Placeholder for platform specific quirks needing
+# ID_INPUT.tags to be set.
+ATTR{[dmi/id]product_name}=="Inspiron 1011", ENV{ID_INPUT.tags}="inspiron_1011"
+ATTR{[dmi/id]product_name}=="Inspiron 1012", ENV{ID_INPUT.tags}="inspiron_1012"
+ATTR{[dmi/id]product_name}=="Inspiron 1120", ENV{ID_INPUT.tags}="inspiron_1120"
+ATTR{[dmi/id]product_name}=="HP MiniNote 1000", ENV{ID_INPUT.tags}="mininote_1000"
+
+LABEL="xorg_synaptics_quirks_end"
