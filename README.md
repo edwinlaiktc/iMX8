@@ -56,6 +56,20 @@ sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 sudo apt-get install gcc-aarch64-linux-gnu
 ```
 
+### Clone all you need
+Since file is too big to push... you have to clone from the Source above.<br>
+```
+git clone https://source.codeaurora.org/external/imx/uboot-imx
+git checkout imx_v2017.03_4.9.123_imx8mm_ga
+mv uboot-imx 1_uboot
+git clone https://source.codeaurora.org/external/imx/imx-mkimage
+git checkout imx_4.9.123_imx8mm_ga
+mv imx-mkimage 3_mkimage
+git clone https://source.codeaurora.org/external/imx/linux-imx
+git checkout imx_4.9.123_imx8mm_ga
+mv linux-imx 4_linux
+```
+
 ### Build uboot
 To build uboot, just running script __build_uboot.sh__. <br>
 But make sure you copy the __ddr_init.c__ and __ddrphy_train.c__ to the folder refer to your platform. <br>
