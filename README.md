@@ -56,22 +56,49 @@ sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 sudo apt-get install gcc-aarch64-linux-gnu
 ```
 
-### Complied uboot
+### Build uboot
 To build uboot, just running script __build_uboot.sh__. <br>
-
+But make sure you copy the __ddr_init.c__ and __ddrphy_train.c__ to the folder refer to your platform. <br>
+ * Hint : [Create DDR Training file]()
 ```bash
-# default platform is set as mx6_ktc_defconfig
+# default platform is set as imx8mq_evk_defconfig
 ./build_uboot.sh <your_platform_defconfig>
 ```
 
-### Dump to SD Card
-Also, running script __dd_uboot.sh__ to dump uboot to specific address of SD card. <br>
-Default device name is "c", which fit to my usage, change it if needed.
+### Make mkimage
+iMX8 is pretty different with iMX6, and actually... not completed enough. <br>
+With hybrid structure, bootloader of iMX8 including both uefi and uboot.<br>
+Which make us have to build mkimage for booting up.<br><br>
 
+Also, run the script!
 ```bash
-# <X> will be device name of your sd card, ig. /dev/sdc => c
-./dd_uboot.sh <X>
+# Platform include iMX8M, iMX8QM, iMX8QX and iMX8dv. -J is used by "make"
+./mk_image.sh -p <platform> -j <N>
 ```
+ * Note: I already skip 2_atf(ARM Trusted Firmware), for detail please checkout [atf]().
+
+### Copy Kernel
+To build but kernel just run following command.
+```bash
+cd 4_linux
+make defconfig
+# make menuconfig => make any change u to fit your requirements
+make -j 16
+```
+Then you can run my script!
+```
+# target = /dev/sdc1, mnt = place you want to mount, default is set as /mnt
+./cp_Kernel -t <target> -m <mount_pt>
+```
+ * Note: Make sure you already finished setting up SD card partition! Detail: [SD Card Setup]()
+
+### dump Busybox
+Just copy busybox to SD card~
+```
+./dump_busybox -t <target> -m <mount_pt>
+```
+ * Note : SAME AS KERNEL. Detail: [SD Card Setup]()
+
 
 ## Directory Hierarchy
 
