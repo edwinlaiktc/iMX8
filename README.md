@@ -36,7 +36,7 @@
    - mkimage :[imx_4.9.123_imx8mm_ga](https://source.codeaurora.org/external/imx/imx-mkimage)
    - kernel :[imx_4.9.123_imx8mm_ga](https://source.codeaurora.org/external/imx/linux-imx)
    - busybox :[busybox](5_busybox/)
- * Documents : [Uboot2015-Wiki](https://github.com/edwinlaiktc/iMX8/wiki)
+ * Documents : [iMX8-Wiki](https://github.com/edwinlaiktc/iMX8/wiki)
 
 ### Release Note
  * Current Modified Version : v1.0.0
