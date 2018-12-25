@@ -1,8 +1,0 @@
-#!/bin/sh
-mount -a
-
-#printf "Mount SD Card"
-#mount /dev/mmcblk0p1 /mnt
-
-cd /
-./init.sh

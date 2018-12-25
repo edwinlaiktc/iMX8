@@ -1,4 +1,0 @@
-# Device nodes to trigger on-demand module loading.
-fuse fuse c10:229
-cuse cuse c10:203
-btrfs btrfs-control c10:234

@@ -1,8 +1,0 @@
-export LD_LIBRARY_PATH=/lib:/usr/lib
-PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-export PATH
-#vim:syntax=sh
-alias ll="ls -alF"
-alias vim="vi"
-alias reboot="reboot -f"
-alias poweroff="poweroff -f"

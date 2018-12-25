@@ -1,8 +1,0 @@
-#!/bin/sh
-mount -a
-alias ll='ls -alF'
-alias ls='ls --color=auto'
-alias poweroff='poweroff -f'
-alias reboot='reboot -f'
-alias vim='vi'
-
