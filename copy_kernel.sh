@@ -1,11 +1,11 @@
 #!/bin/bash
 
 function usage() {
-        echo "Usage : build_image [option]";
-        echo "  -t    --target	Target device fs, eg. /dev/sdc1";
-        echo "  -m    --mnt	Local mount point.";
-	echo "  -d    --default	Default, ie. /dev/sdc1 & /mnt";
-        echo "  -h    --help	Print this message.";
+        echo "Usage : create_kernel [option]";
+        echo "  -t	--target	Target device fs, eg. /dev/sdc1";
+        echo "  -m	--mnt		Local mount point.";
+	echo "  -d	--default	Default, ie. /dev/sdc1 & /mnt";
+        echo "  -h	--help		Print this message.";
         exit 0;
 }
 
@@ -37,7 +37,7 @@ fi
 
 sudo mount $device $mnt
 
-cp ./4_linux/arch/arm64/boot/Image $mnt
-cp ./4_linux/arch/arm64/boot/dts/freescale/fsl-imx8mq-evk.dtb $mnt
+cp ./linux/arch/arm64/boot/Image $mnt
+cp ./linux/arch/arm64/boot/dts/freescale/fsl-imx8mq-evk.dtb $mnt
 
 sudo umount $mnt

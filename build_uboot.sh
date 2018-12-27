@@ -1,10 +1,10 @@
 #!/bin/bash
 
 function usage() {
-	echo "Usage : mkuboot [option]";
-	echo "  -c    --config		Set config file.";
+	echo "Usage : build_uboot [option]";
+	echo "  -c    --config	Set config file.";
 	echo "  -j    --jobs [N]	Allow N jobs at once; infinite jobs with no arg ";
-	echo "  -h    --help          	Print this message.";
+	echo "  -h    --help		Print this message.";
 	exit 0;
 }
 
@@ -29,7 +29,7 @@ if [ -z $cfg ]; then
 	exit 1;
 fi
 
-cd ./1_uboot
+cd ./uboot
 
 export ARCH=arm64
 export CROSS_COMPILE=aarch64-linux-gnu-

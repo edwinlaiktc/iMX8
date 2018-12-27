@@ -3,12 +3,12 @@
 # sudo apt-get install lib32z1 lib32ncurses5
 
 function usage() {
-	echo "Usage : mkimage [option]";
+	echo "Usage : mk_image [option]";
 	echo "  -p    --platform	Set platform to make.";
         echo "  -c    --clean        	Clean all make files.";
 	echo "  -d    --dump        	dump to sdcard.";
-	echo "  -j    --job [N]         Allow N jobs at once; infinite jobs with no arg.";
-	echo "  -h    --help          	Print this message.";
+	echo "  -j    --job [N]	Allow N jobs at once; infinite jobs with no arg.";
+	echo "  -h    --help		Print this message.";
 	exit 0;
 }
 
@@ -37,7 +37,7 @@ fi
 if [ "$clean" = true ]; then
 	echo "Clear all file of $platform...";
 	rm flash.bin
-	cd ./3_mkimage/
+	cd ./mkimage/
 	make clean SOC=$platform
 
 	cd ./$platform
@@ -53,14 +53,17 @@ fi
 
 echo "Start build image..."
 
-cp ./1_uboot/tools/mkimage ./3_mkimage/$platform/mkimage_uboot
-cp ./1_uboot/arch/arm/dts/fsl-imx8mq-evk.dtb ./3_mkimage/$platform/
+cp ./uboot/tools/mkimage 			./mkimage/$platform/mkimage_uboot
+cp ./uboot/arch/arm/dts/fsl-imx8mq-evk.dtb 	./mkimage/$platform/
 
-cp ./1_uboot/spl/u-boot-spl.bin ./3_mkimage/$platform/
-cp ./1_uboot/u-boot-nodtb.bin ./3_mkimage/$platform/
-cp ./util/* ./3_mkimage/$platform/
+cp ./uboot/spl/u-boot-spl.bin 		./mkimage/$platform/
+cp ./uboot/u-boot-nodtb.bin 		./mkimage/$platform/
 
-cd ./3_mkimage/
+cp ./util/bl31.bin 			./mkimage/$platform/
+cp ./util/signed_hdmi_imx8m.bin		./mkimage/$platform/
+cp ./util/lpddr4* 			./mkimage/$platform/
+
+cd ./mkimage/
 make -j $job SOC=$platform flash_hdmi_spl_uboot
 
 cp ./$platform/flash.bin ../
@@ -72,8 +75,9 @@ if [ -z $target ];then
 fi
 
 echo "Start dump to SD card..."
+echo "if=./$platform/flash.bin of=$target"
 sudo dd if=./$platform/flash.bin of=$target bs=1k seek=33 status=progress && sync
 
 echo "Dump SD card Done"
 exit 0; 
-
+ 
