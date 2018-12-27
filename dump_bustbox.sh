@@ -35,8 +35,8 @@ if [ -z $mnt ]; then
 	exit 1;
 fi
 
+tar -zxf busybox.tgz
+
 sudo mount $device $mnt
-
-cp -axR ./5_busybox/* $mnt
-
+cp -axR ./busybox/* $mnt
 sudo umount $mnt

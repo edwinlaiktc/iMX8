@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function usage() {
-        echo "Usage : create_kernel [option]";
+        echo "Usage : copy_kernel [option]";
         echo "  -t	--target	Target device fs, eg. /dev/sdc1";
         echo "  -m	--mnt		Local mount point.";
 	echo "  -d	--default	Default, ie. /dev/sdc1 & /mnt";

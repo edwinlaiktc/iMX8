@@ -35,12 +35,12 @@
    - uboot :[imx_v2017.03_4.9.123_imx8mm_ga](https://source.codeaurora.org/external/imx/uboot-imx)
    - mkimage :[imx_4.9.123_imx8mm_ga](https://source.codeaurora.org/external/imx/imx-mkimage)
    - kernel :[imx_4.9.123_imx8mm_ga](https://source.codeaurora.org/external/imx/linux-imx)
-   - busybox :[busybox](5_busybox/)
+   - busybox :[busybox](./busybox.tgz)
  * Documents : [iMX8-Wiki](https://github.com/edwinlaiktc/iMX8/wiki)
 
 ### Release Note
  * Current Modified Version : v1.0.0
- * Modified Note : [[Modified Note](CHANGELOG.md)]
+ * Released Note : [[Released Note](CHANGELOG.md)]
 
 ### Uboot Compiler mapping table
 | Version | Compiler | ARCH | Platform |
@@ -48,86 +48,51 @@
 | imx_4.9.123 | GCC5.4.0 | arm | Ubuntu16.04LTS |
 
 ## Build your own UBoot
-### Requirements
+### 0. Requirements
 ```bash
-sudo apt-get install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev
-sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi
-sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 sudo apt-get install gcc-aarch64-linux-gnu
 ```
 
-### Clone all you need
-Since file is too big to push... you have to clone from the Source above.<br>
-```
-git clone https://source.codeaurora.org/external/imx/uboot-imx
-git checkout imx_v2017.03_4.9.123_imx8mm_ga
-mv uboot-imx 1_uboot
-git clone https://source.codeaurora.org/external/imx/imx-mkimage
-git checkout imx_4.9.123_imx8mm_ga
-mv imx-mkimage 3_mkimage
-git clone https://source.codeaurora.org/external/imx/linux-imx
-git checkout imx_4.9.123_imx8mm_ga
-mv linux-imx 4_linux
-```
-
-### Build uboot
+### 1. [Build uboot](https://github.com/edwinlaiktc/iMX8/wiki/Build-UBoot)
 To build uboot, just running script __build_uboot.sh__. <br>
-But make sure you copy the __ddr_init.c__ and __ddrphy_train.c__ to the folder refer to your platform. <br>
- * Hint : [Create DDR Training file]()
-```bash
-# default platform is set as imx8mq_evk_defconfig
-./build_uboot.sh <your_platform_defconfig>
+
+```
+Usage : build_uboot [option]
+  -c    --config	Set config file.
+  -j    --jobs [N]	Allow N jobs at once; infinite jobs with no arg 
+  -h    --help		Print this message.
 ```
 
-### Make mkimage
+### 2. [Make mkimage](https://github.com/edwinlaiktc/iMX8/wiki/Make-mkimage)
 iMX8 is pretty different with iMX6, and actually... not completed enough. <br>
 With hybrid structure, bootloader of iMX8 including both uefi and uboot.<br>
 Which make us have to build mkimage for booting up.<br><br>
 
-Also, run the script!
-```bash
-# Platform include iMX8M, iMX8QM, iMX8QX and iMX8dv. -J is used by "make"
-./mk_image.sh -p <platform> -j <N>
-```
- * Note: I already skip 2_atf(ARM Trusted Firmware), for detail please checkout [atf]().
+### 3. [Copy Kernel](https://github.com/edwinlaiktc/iMX8/wiki/3.-Copy-Kernel)
 
-### Copy Kernel
-To build but kernel just run following command.
-```bash
-cd 4_linux
-make defconfig
-# make menuconfig => make any change u to fit your requirements
-make -j 16
-```
-Then you can run my script!
-```
-# target = /dev/sdc1, mnt = place you want to mount, default is set as /mnt
-./cp_Kernel -t <target> -m <mount_pt>
-```
- * Note: Make sure you already finished setting up SD card partition! Detail: [SD Card Setup]()
+ * Note: Make sure you already finished setting up SD card partition! Detail: [SD Card Setup](https://github.com/edwinlaiktc/iMX8/wiki/Setup-SD-Card-Partition)
+Run __create_kernel.sh__, which clones the kernel source code and compile it automatically.<br>
+Run __copy_kernel.sh__, which copies kernel Image and dtb to SD card.
 
-### dump Busybox
-Just copy busybox to SD card~
-```
-./dump_busybox -t <target> -m <mount_pt>
-```
- * Note : SAME AS KERNEL. Detail: [SD Card Setup]()
-
+### 4. [Dump Busybox](https://github.com/edwinlaiktc/iMX8/wiki/4.-Dump-Busybox)
+Run __dump_busybox.sh__, which decompresses busybox.tgz and copy it to SD card.<br>
 
 ## Directory Hierarchy
 
 ```
-root
-├── 1_uboot
-├── 2_atf
-├── 3_mkimage
-├── 4_linux
-├── 5_busybox
+iMX8
 ├── build_uboot.sh
-├── cp_kernel.sh
+├── busybox.tgz
+├── CHANGELOG.md
+├── copy_kernel.sh
+├── create_kernel.sh
 ├── dump_bustbox.sh
+├── firmware-imx-7.9.bin
+├── Licenses
+├── mkimage
 ├── mk_image.sh
 ├── README.md
+├── uboot
 └── util
 
 ```
