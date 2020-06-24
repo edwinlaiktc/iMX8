@@ -101,8 +101,6 @@ iMX8
 Disclaimer: Everything you see here are free for studying and none-profit usage.
 Also make sure you comply with the [license](Licenses).
 
-`Copyright © 2018, Kingston Technology Corp.`
-
-`Developed by : RD Module | Edwin Lai & Sam Cheng`
+`Developed by : Edwin Lai & Sam Cheng`
 
 [CodeAurora imx]: <https://source.codeaurora.org/external/imx/>
